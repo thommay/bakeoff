@@ -1,16 +1,22 @@
-defmodule Bakeoff.User do
+defmodule Bakeoff.Contestant do
   use Bakeoff.Web, :model
+  import Ecto.Query
 
-  schema "users" do
+  schema "contestants" do
     field :name, :string
-    field :prediction, :string
-    field :admin, :boolean, default: false
-    has_many :contestants, Bakeoff.Contestant
+    field :out, :boolean, default: false
+    field :knockedout, :integer
+    belongs_to :user, Bakeoff.User
 
     timestamps
   end
 
-  @required_fields ~w(name prediction admin)
+  def two_unassigned(query) do
+    from c in query, where: is_nil(c.user_id), select: c,
+      limit: 2, order_by: fragment("random()")
+  end
+
+  @required_fields ~w(name out knockedout)
   @optional_fields ~w()
 
   @doc """
