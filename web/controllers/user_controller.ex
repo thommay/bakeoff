@@ -2,6 +2,7 @@ defmodule Bakeoff.UserController do
   use Bakeoff.Web, :controller
 
   alias Bakeoff.User
+  alias Bakeoff.Contestant
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -15,6 +16,16 @@ defmodule Bakeoff.UserController do
 
     case Repo.insert(changeset) do
       {:ok, user} ->
+
+        contestants = Contestant
+        |> Contestant.two_unassigned
+        |> Repo.all
+
+        Enum.map(contestants, fn item ->
+          item = Ecto.Changeset.change(item, user_id: user.id)
+          Repo.update(item)
+        end)
+
         conn
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
