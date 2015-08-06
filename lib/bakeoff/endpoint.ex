@@ -31,5 +31,5 @@ defmodule Bakeoff.Endpoint do
     key: "_bakeoff_key",
     signing_salt: "NXpNnMq3"
 
-  plug :router, Bakeoff.Router
+  plug Bakeoff.Router
 end
