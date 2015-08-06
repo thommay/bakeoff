@@ -6,7 +6,8 @@ defmodule Bakeoff.PageController do
       nil ->
         redirect(conn, to: user_path(conn, :new))
       id ->
-        render conn, "index.html"
+        contestants = Bakeoff.Contestant |> Repo.all |> Repo.preload [:user]
+        render conn, "index.html", contestants: contestants
     end
   end
 end
