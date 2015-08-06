@@ -35,10 +35,13 @@ defmodule Bakeoff.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    user = Repo.get!(User, id)
+    user = Repo.get!(User, id) |> Bakeoff.Repo.preload [:contestants]
+    contestants = user.contestants
+                  |> Enum.map(&(&1.name))
+                  |> Enum.join(", ")
     conn
     |> put_resp_cookie("id", id, max_age: 14515200)
-    |> render("show.html", user: user)
+    |> render("show.html", user: user, contestants: contestants)
   end
 
 end
