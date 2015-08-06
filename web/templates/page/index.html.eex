@@ -2,13 +2,18 @@
 
 <table class="table">
   <thead>
-    <tr><th>Contestant</th><th>Who</th></tr>
+    <tr><th>Contestant</th><th>Who</th><th>Which week were they knocked out?</th></tr>
     <%= for contestant <- @contestants do %>
-      <tr>
+      <%= if contestant.out do %>
+      <tr class="strikeout"%>
+      <% else %>
+      <tr%>
+      <% end %>
         <td><%= contestant.name %></td>
         <%= if contestant.user do %>
         <td><%= contestant.user.name %></td>
         <% end %>
+        <td><%= contestant.knockedout %></td>
       </tr>
     <% end %>
   </tbody>
