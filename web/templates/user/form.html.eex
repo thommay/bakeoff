@@ -16,7 +16,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :prediction, "Who do you think will win?", class: "control-label" %>
+    <%= label f, :prediction, "Who do you think will win (just for fun - you'll get the names of your sweepstake entries in a second!)?", class: "control-label" %>
     <%= text_input f, :prediction, class: "form-control" %>
   </div>
 
