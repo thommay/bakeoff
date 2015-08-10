@@ -16,6 +16,7 @@
   </div>
 
   <div class="form-group">
+    <p>To refresh your memory of the contestants <a href="http://www.theguardian.com/tv-and-radio/tvandradioblog/gallery/2015/aug/04/the-great-british-bake-off-2015-meet-the-contestants-in-pictures" target="_blank">click here</a></p>
     <%= label f, :prediction, "Who do you think will win (just for fun - you'll get the names of your sweepstake entries in a second!)?", class: "control-label" %>
     <%= text_input f, :prediction, class: "form-control" %>
   </div>
