@@ -11,6 +11,10 @@ defmodule Bakeoff.Contestant do
     timestamps
   end
 
+  def all_gone(query) do
+    from c in query, where: is_nil(c.user_id), select: 1
+  end
+
   def two_unassigned(query) do
     from c in query, where: is_nil(c.user_id), select: c,
       limit: 2, order_by: fragment("random()")
