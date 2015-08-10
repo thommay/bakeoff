@@ -30,7 +30,11 @@ defmodule Bakeoff.UserController do
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        if {:name, "has already been taken"} in changeset.errors do
+          redirect(conn, to: page_path(conn, :index, existing: true))
+        else
+          render(conn, "new.html", changeset: changeset)
+        end
     end
   end
 

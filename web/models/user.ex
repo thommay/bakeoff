@@ -22,5 +22,6 @@ defmodule Bakeoff.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> validate_unique(:name, on: Bakeoff.Repo, downcase: true)
   end
 end
