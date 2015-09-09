@@ -20,8 +20,8 @@ defmodule Bakeoff.Contestant do
       limit: 2, order_by: fragment("random()")
   end
 
-  @required_fields ~w(name out knockedout)
-  @optional_fields ~w()
+  @required_fields ~w(name out)
+  @optional_fields ~w(knockedout)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
