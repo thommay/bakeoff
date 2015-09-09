@@ -20,6 +20,11 @@ defmodule Bakeoff.Contestant do
       limit: 2, order_by: fragment("random()")
   end
 
+  def sorted(query) do
+    from c in query,
+      order_by: [asc: c.name]
+  end
+
   @required_fields ~w(name out)
   @optional_fields ~w(knockedout)
 
